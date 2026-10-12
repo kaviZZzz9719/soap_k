@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Project Config Files</title>
+<style>
+body{font-family:system-ui,sans-serif;max-width:900px;margin:0 auto;padding:1rem;background:#fff;color:#111}
+h2{font-size:1rem;font-family:monospace;background:#eee;padding:.5rem .75rem;margin:1.5rem 0 0;border-radius:6px 6px 0 0}
+pre{margin:0;padding:1rem;background:#f6f8fa;overflow-x:auto;border-radius:0 0 6px 6px;font-size:.9rem}
+@media (prefers-color-scheme:dark){body{background:#0d1117;color:#e6edf3}h2{background:#21262d}pre{background:#161b22}}
+</style>
+</head>
+<body>
+<h1>Project Config Files</h1>
+<section>
+<h2>eslint.config.mjs</h2>
+<pre><code>import { defineConfig, globalIgnores } from &quot;eslint/config&quot;;
+import nextCoreWebVitals from &quot;eslint-config-next/core-web-vitals&quot;;
+
+export default defineConfig([
+  // Keep the starter on the flat config export that actually runs under the pinned ESLint/Next toolchain.
+  ...nextCoreWebVitals,
+  globalIgnores([&quot;.next/**&quot;, &quot;out/**&quot;, &quot;build/**&quot;, &quot;next-env.d.ts&quot;]),
+]);
+</code></pre>
+</section>
+<section>
+<h2>postcss.config.mjs</h2>
+<pre><code>const postcssConfig = {
+  plugins: {
+    &quot;@tailwindcss/postcss&quot;: {},
+  },
+};
+
+export default postcssConfig;
+</code></pre>
+</section>
+<section>
+<h2>drizzle.config.json</h2>
+<pre><code>{
+  &quot;dialect&quot;: &quot;postgresql&quot;,
+  &quot;schema&quot;: &quot;./src/db/schema.ts&quot;,
+  &quot;dbCredentials&quot;: {
+    &quot;url&quot;: &quot;postgresql://postgres:postgres@127.0.0.1:5432/app_db&quot;
+  }
+}
+</code></pre>
+</section>
+<section>
+<h2>next.config.ts</h2>
+<pre><code>import type { NextConfig } from &quot;next&quot;;
+
+const nextConfig: NextConfig = {};
+
+export default nextConfig;
+</code></pre>
+</section>
+<section>
+<h2>package.json</h2>
+<pre><code>{
+  &quot;name&quot;: &quot;nextjs-postgresql-template&quot;,
+  &quot;private&quot;: true,
+  &quot;scripts&quot;: {
+    &quot;dev&quot;: &quot;next dev&quot;,
+    &quot;build&quot;: &quot;next build&quot;,
+    &quot;start&quot;: &quot;next start&quot;,
+    &quot;lint&quot;: &quot;eslint .&quot;,
+    &quot;typecheck&quot;: &quot;tsc --noEmit&quot;
+  },
+  &quot;dependencies&quot;: {
+    &quot;@fontsource-variable/dm-sans&quot;: &quot;^5.3.0&quot;,
+    &quot;@fontsource-variable/fraunces&quot;: &quot;^5.3.0&quot;,
+    &quot;dotenv&quot;: &quot;17.3.1&quot;,
+    &quot;drizzle-orm&quot;: &quot;0.45.2&quot;,
+    &quot;lucide-react&quot;: &quot;^1.55.0&quot;,
+    &quot;next&quot;: &quot;16.2.6&quot;,
+    &quot;pg&quot;: &quot;8.20.0&quot;,
+    &quot;react&quot;: &quot;19.2.6&quot;,
+    &quot;react-dom&quot;: &quot;19.2.6&quot;
+  },
+  &quot;devDependencies&quot;: {
+    &quot;@tailwindcss/postcss&quot;: &quot;4.1.17&quot;,
+    &quot;@types/node&quot;: &quot;22.19.15&quot;,
+    &quot;@types/pg&quot;: &quot;8.18.0&quot;,
+    &quot;@types/react&quot;: &quot;19.2.14&quot;,
+    &quot;@types/react-dom&quot;: &quot;19.2.3&quot;,
+    &quot;drizzle-kit&quot;: &quot;0.31.10&quot;,
+    &quot;eslint&quot;: &quot;9.39.4&quot;,
+    &quot;eslint-config-next&quot;: &quot;16.2.6&quot;,
+    &quot;postcss&quot;: &quot;8.5.8&quot;,
+    &quot;tailwindcss&quot;: &quot;4.1.17&quot;,
+    &quot;typescript&quot;: &quot;5.9.3&quot;
+  }
+}
+</code></pre>
+</section>
+<section>
+<h2>tsconfig.json</h2>
+<pre><code>{
+  &quot;compilerOptions&quot;: {
+    &quot;target&quot;: &quot;ES2017&quot;,
+    &quot;lib&quot;: [
+      &quot;dom&quot;,
+      &quot;dom.iterable&quot;,
+      &quot;esnext&quot;
+    ],
+    &quot;allowJs&quot;: false,
+    &quot;skipLibCheck&quot;: true,
+    &quot;strict&quot;: true,
+    &quot;noEmit&quot;: true,
+    &quot;esModuleInterop&quot;: true,
+    &quot;module&quot;: &quot;esnext&quot;,
+    &quot;moduleResolution&quot;: &quot;bundler&quot;,
+    &quot;resolveJsonModule&quot;: true,
+    &quot;isolatedModules&quot;: true,
+    &quot;jsx&quot;: &quot;react-jsx&quot;,
+    &quot;incremental&quot;: true,
+    &quot;baseUrl&quot;: &quot;.&quot;,
+    &quot;paths&quot;: {
+      &quot;@/*&quot;: [
+        &quot;./src/*&quot;
+      ]
+    },
+    &quot;plugins&quot;: [
+      {
+        &quot;name&quot;: &quot;next&quot;
+      }
+    ]
+  },
+  &quot;include&quot;: [
+    &quot;next-env.d.ts&quot;,
+    &quot;**/*.ts&quot;,
+    &quot;**/*.tsx&quot;,
+    &quot;.next/types/**/*.ts&quot;,
+    &quot;.next/dev/types/**/*.ts&quot;
+  ],
+  &quot;exclude&quot;: [
+    &quot;node_modules&quot;
+  ]
+}
+</code></pre>
+</section>
+</body>
+</html>
